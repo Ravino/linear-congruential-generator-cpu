@@ -38,14 +38,14 @@ std::vector<firstValueStruct> createFirstValue(unsigned countFlow, unsigned min,
     firstValue.a = lastMultiplier;
 
 
-    vec[i] = firstValue;
+    vec.emplace_back(firstValue);
   }
 
 
   unsigned lastA = vec.back().a;
 
 
-  for(unsigned i; i < vec.size(); i++) {
+  for(unsigned i = 0; i < vec.size(); i++) {
     vec[i].lastA = lastA;
     vec[i].min = min;
     vec[i].max = max;
@@ -61,6 +61,6 @@ std::vector<firstValueStruct> createFirstValue(unsigned countFlow, unsigned min,
 
 
 unsigned createGenerator(unsigned x, unsigned lastA, unsigned b) {
-  x = ((x * lastA) % C + b) % C;
+  x = x * lastA + b;
   return x;
 }

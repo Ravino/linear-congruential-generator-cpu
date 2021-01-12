@@ -10,7 +10,7 @@
 
 
 
-double randomizer(std::vector<unsigned> *vec, unsigned length, unsigned min, unsigned max) {
+double randomize_cpu(unsigned *vec, unsigned length, unsigned min, unsigned max) {
 
   double middleValue = 0.0;
   unsigned countFlow = getCountFlow();
@@ -24,7 +24,7 @@ double randomizer(std::vector<unsigned> *vec, unsigned length, unsigned min, uns
 
 
   for (std::size_t itemFlow = 0; itemFlow < countFlow; ++itemFlow) {
-    poolFlow.emplace_back(std::thread(worker, std::ref(vec), firstValueVec[itemFlow], itemFlow, countFlow, length));
+    poolFlow.emplace_back(std::thread(worker, vec, firstValueVec[itemFlow], itemFlow, countFlow, length, std::ref(mtx), std::ref(middleValue)));
   }
 
 
